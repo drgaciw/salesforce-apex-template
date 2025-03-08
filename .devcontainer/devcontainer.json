@@ -1,0 +1,117 @@
+{
+    "name": "Salesforce Apex Development",
+    "dockerFile": "Dockerfile",
+    "remoteUser": "node",
+    
+    // Set container specific settings
+    "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        
+        // Salesforce settings
+        "salesforcedx-vscode-apex.java.home": "/usr/lib/jvm/default-java",
+        "salesforcedx-vscode-core.push-or-deploy-on-save.enabled": false,
+        "salesforcedx-vscode-core.retrieve-test-code-coverage": true,
+        "salesforcedx-vscode-core.show-cli-success-msg": false,
+        "salesforcedx-vscode-apex.enable-semantic-errors": true,
+        "salesforcedx-vscode-apex.enable-sobject-refresh-on-startup": true,
+        "salesforcedx-vscode-apex.advanced.enable-completion-statistics": true,
+        "salesforcedx-vscode-core.telemetry.enabled": false,
+        
+        // Apex PMD settings
+        "apexPMD.rulesets": [
+            ".devcontainer/apex-ruleset.xml"
+        ],
+        "apexPMD.runOnFileOpen": false,
+        "apexPMD.runOnFileSave": true,
+        
+        // Editor settings
+        "editor.formatOnSave": true,
+        "editor.rulers": [100, 120],
+        "editor.suggestSelection": "first",
+        "editor.tabSize": 4,
+        "editor.wordWrap": "off",
+        "editor.renderWhitespace": "boundary",
+        "files.autoSave": "afterDelay",
+        "files.autoSaveDelay": 1000,
+        
+        // Prettier settings
+        "prettier.singleQuote": true,
+        "prettier.tabWidth": 4,
+        "prettier.printWidth": 120,
+        
+        // GitLens settings
+        "gitlens.codeLens.enabled": true,
+        "gitlens.currentLine.enabled": true,
+        "gitlens.hovers.currentLine.over": "line",
+        
+        // Code Spell Checker settings
+        "cSpell.words": [
+            "Salesforce",
+            "SFDX",
+            "SOQL",
+            "SOSL",
+            "Aura",
+            "lwc"
+        ],
+        
+        // ESLint settings
+        "eslint.validate": [
+            "javascript",
+            "javascriptreact",
+            "html"
+        ],
+        
+        // XML settings
+        "xml.format.splitAttributes": true,
+        "xml.format.joinCDATALines": false
+    },
+    
+    // Add the required extensions
+    "extensions": [
+        "salesforce.salesforcedx-vscode",
+        "redhat.vscode-xml",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "streetsidesoftware.code-spell-checker",
+        "github.copilot",
+        "github.vscode-pull-request-github",
+        "chuckjonas.apex-pmd",
+        "financialforce.lana",
+        "eamodio.gitlens",
+        "HugoOM.sfdx-documenter"
+    ],
+    
+    // Mount volumes for data persistence
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+        "source=salesforce-cli-data,target=/home/node/.sfdx,type=volume",
+        "source=salesforce-cli-config,target=/home/node/.config/sfdx,type=volume",
+        "source=salesforce-cli-cache,target=/home/node/.cache/sfdx,type=volume",
+        "source=salesforce-bash-history,target=/commandhistory,type=volume"
+    ],
+    
+    // Forward ports for local development
+    "forwardPorts": [8443, 1717, 1718, 1719],
+    
+    // Use 'postCreateCommand' to run commands after the container is created
+    "postCreateCommand": "sh .devcontainer/post-create.sh && sh .devcontainer/setup-vscode.sh && sh .devcontainer/setup-sfdx.sh",
+    
+    // Set environment variables
+    "remoteEnv": {
+        "SFDX_DOMAIN_RETRY": "300",
+        "SFDX_LOG_LEVEL": "DEBUG"
+    },
+    
+    // Features to install
+    "features": {
+        "ghcr.io/devcontainers/features/java:1": {
+            "version": "17",
+            "installMaven": "true",
+            "mavenVersion": "3.8.6"
+        },
+        "ghcr.io/devcontainers/features/git:1": {
+            "version": "latest",
+            "ppa": "false"
+        }
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "defaultusername": "",
+    "defaultdevhubusername": "",
+    "restDeploy": true,
+    "apiVersion": "58.0",
+    "disableTelemetry": false,
+    "maxQueryLimit": 50000
+}

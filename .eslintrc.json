@@ -1,0 +1,64 @@
+{
+  "root": true,
+  "extends": [
+    "@salesforce/eslint-config-lwc/recommended",
+    "eslint:recommended"
+  ],
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "requireConfigFile": false
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2020": true
+  },
+  "overrides": [
+    {
+      "files": ["*.test.js"],
+      "env": {
+        "jest": true
+      },
+      "plugins": ["jest"],
+      "extends": ["plugin:jest/recommended"],
+      "rules": {
+        "jest/no-disabled-tests": "warn",
+        "jest/no-focused-tests": "error",
+        "jest/no-identical-title": "error",
+        "jest/prefer-to-have-length": "warn",
+        "jest/valid-expect": "error"
+      }
+    },
+    {
+      "files": ["**/lwc/**/*.js"],
+      "rules": {
+        "@lwc/lwc/no-unexpected-wire-adapter-usages": "error"
+      }
+    },
+    {
+      "files": ["**/aura/**/*.js"],
+      "plugins": ["@salesforce/eslint-plugin-aura"],
+      "extends": ["plugin:@salesforce/eslint-plugin-aura/recommended"],
+      "rules": {
+        "vars-on-top": "off",
+        "no-unused-expressions": "off"
+      }
+    }
+  ],
+  "rules": {
+    "no-console": "warn",
+    "no-debugger": "warn",
+    "no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "quotes": ["error", "single", { "avoidEscape": true }],
+    "semi": ["error", "always"],
+    "indent": ["error", 4, { "SwitchCase": 1 }]
+  }
+}

@@ -1,0 +1,54 @@
+# Salesforce DX specific
+.sfdx/
+.sf/
+.localdevserver/
+
+# VS Code specific
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+
+# Environment variables
+.env
+
+# Node.js dependencies
+node_modules/
+package-lock.json
+npm-debug.log
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+jspm_packages/
+bower_components/
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Compiled binary addons
+build/Release
+
+# Temporary folders
+tmp/
+temp/
+
+# Salesforce metadata
+.tern-project
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# Apex PMD reports
+.pmdCache
+pmd-reports/
+
+# Misc
+.idea/
+*.swp
+*.swo

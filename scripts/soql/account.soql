@@ -1,0 +1,35 @@
+// This is a sample SOQL query that you can use to test your org setup
+// To execute: 1. Ensure you're authenticated to your org
+//             2. Right-click this file in VS Code and select "SFDX: Execute SOQL Query"
+
+// Basic account query
+SELECT Id, Name, Type, Industry, CreatedDate 
+FROM Account 
+ORDER BY CreatedDate DESC 
+LIMIT 10
+
+// Commented out queries for reference:
+
+/*
+// Account with contacts
+SELECT Id, Name, 
+    (SELECT Id, Name, Email FROM Contacts)
+FROM Account
+WHERE Type = 'Customer - Direct'
+LIMIT 5
+
+// Account with opportunities
+SELECT Id, Name,
+    (SELECT Id, Name, Amount, StageName FROM Opportunities)
+FROM Account
+WHERE Type = 'Customer - Direct'
+AND Id IN (SELECT AccountId FROM Opportunity)
+LIMIT 5
+
+// Account aggregate query
+SELECT Type, COUNT(Id) AccountCount
+FROM Account
+GROUP BY Type
+HAVING COUNT(Id) > 0
+ORDER BY COUNT(Id) DESC
+*/

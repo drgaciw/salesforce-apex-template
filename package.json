@@ -1,0 +1,57 @@
+{
+  "name": "salesforce-apex-devcontainer-template",
+  "version": "1.0.0",
+  "description": "Development container template for Salesforce Apex development",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint force-app/main/default/lwc/**/*.js",
+    "lint:fix": "eslint force-app/main/default/lwc/**/*.js --fix",
+    "prettier": "prettier --write \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
+    "prettier:verify": "prettier --check \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
+    "postinstall": "husky install",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}": [
+      "prettier --write"
+    ],
+    "**/*.{cls,trigger}": [
+      "pmd -d . -R apex-ruleset.xml -f text"
+    ],
+    "**/*.js": [
+      "eslint"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/salesforce-apex-devcontainer-template.git"
+  },
+  "keywords": [
+    "salesforce",
+    "apex",
+    "devcontainer",
+    "vscode",
+    "sfdx"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/salesforce-apex-devcontainer-template/issues"
+  },
+  "homepage": "https://github.com/yourusername/salesforce-apex-devcontainer-template#readme",
+  "devDependencies": {
+    "@lwc/eslint-plugin-lwc": "^1.6.3",
+    "@prettier/plugin-xml": "^3.2.2",
+    "@salesforce/eslint-config-lwc": "^3.5.2",
+    "@salesforce/eslint-plugin-aura": "^2.1.0",
+    "@salesforce/eslint-plugin-lightning": "^1.0.0",
+    "@salesforce/sfdx-lwc-jest": "^1.4.1",
+    "eslint": "^8.55.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-jest": "^27.6.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.0",
+    "prettier-plugin-apex": "^2.0.1"
+  }
+}
